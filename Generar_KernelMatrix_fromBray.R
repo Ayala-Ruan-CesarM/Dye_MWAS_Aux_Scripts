@@ -1,7 +1,7 @@
+## It takes as input a bray-courtis matrix bewteen metagenome samples
+## uses MirKAT library from Wilson et al., (2020). MiRKAT: kernel machine regression-based global association tests for the microbiome. Bioinformatics, 37(11), 1595–1597. https://doi.org/10.1093/bioinformatics/btaa951
+## Executable from Rstudio given absolute path to files
 library(MiRKAT)
-###
-##Así funciona bien para generar la matrix.
-###
 bray_curtis <- read.delim("c:/Users/cesar/OneDrive/Escritorio/UNAM/Proyecto/Archivos_finales/2024-2/MiRKAT/Bray_courtis_Species.txt", sep="\t")
 print(bray_curtis)
 # Assuming all columns except the first are numeric data
