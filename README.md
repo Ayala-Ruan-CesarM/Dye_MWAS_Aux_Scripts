@@ -1,3 +1,11 @@
 # Dye_MWAS_Aux_Scripts
-This repository contains all auxiliary scripts used to analyze enviromental metagenomes positive for the textil dye phenotype
-in a Microbiome wide association study as part of my Master Degree at the National Autonomus University of Mexico.
+This repository contains all auxiliary scripts used to analyze enviromental metagenomes positive for the textil dye degradation phenotype in a Microbiome wide association study conducted as part of my Master Degree at the National Autonomus University of Mexico at the Lab 14 under Sánchez-Reyes tutorship.
+
+## How to use Remove_HiC.sh
+## How to use Gene_Hits_Annotation_Args.py
+## How to use VolcanoPlot.py
+## How to use QQplot.py
+## How to use Script_to_summarize.py
+## How to use Taxonomic_Scatter_ploy.py
+## How to use VeenDiagram.R
+## How to use Generar_KernelMatrix_fromBray.R
