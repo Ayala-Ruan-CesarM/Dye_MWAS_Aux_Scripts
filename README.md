@@ -3,7 +3,7 @@ This repository contains all auxiliary scripts used to analyze enviromental meta
 
 ## How to use Remove_HiC.sh
 ```
-Bash Remove_HiC.sh -i Original_HiC_Sequences.fasta  -o Output_HiC_Sequences.fasta
+Bash Remove_HiC.sh -i Original_HiC_Sequences.fasta -o Output_HiC_Sequences.fasta
 
 # Currently it removes the chimeric sites GATCGATC AATTAATT GATCAATT
 # But those can be change in the script to accomodate needs
