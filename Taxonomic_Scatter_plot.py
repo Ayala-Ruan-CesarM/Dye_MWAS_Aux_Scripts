@@ -6,17 +6,20 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # It takes as input the original table. It works with any taxonomical order
-# results
-data=pd.read_table('aldex_result_genus.tsv', sep="\t")
-df=data
-def plot_association_graph(df):
-    #df['effect'] = pd.to_numeric(df['effect'], errors='coerce')
-    #df = df.dropna(subset=['effect'])
+# TO UPDATE : add as options the -t option as well as the axis and the # of taxa to display
+def parse_args():
+        parser = argparse.ArgumentParser(description="Sumarize and create graph from pyseer output. -i option is required")
+        parser.add_argument("-i", "--input_file", help = "Input file (Aldex2 R, package results)", required=True)
+        return args
     
+#data=pd.read_table('aldex_result_genus.tsv', sep="\t")
+def plot_association_graph(input_file):
+    
+    df = pd.read_table(input_file, sep="\t") 
     fdr_threshold = -np.log10(1E-03) # Obtional as desiered
-    
     fig, ax = plt.subplots()
-                                                # Changing this number will select the number of taxa names to display
+    
+    # Changing this number will select the number of taxa names to display
     top_positive = df[df['effect'] > 0].nlargest(8, 'effect')['taxa'].values
     top_negative = df[df['effect'] < 0].nsmallest(8, 'effect')['taxa'].values
 
@@ -44,7 +47,8 @@ def plot_association_graph(df):
     plt.show()
 
 if __name__ == "__main__":
-    plot_association_graph(df)
+    args=parse_args()   
+    plot_association_graph(args.input_file)
 
 #    ax.set_xlabel('-log10(Wilcoxon FDR)')
 #    ax.set_ylabel('-log10(Welch FDR)')
