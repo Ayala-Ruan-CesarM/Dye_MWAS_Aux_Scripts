@@ -1,9 +1,9 @@
 ## Script to analize annotation results (gene IDs as text e.g. UNIREF90_UPI100089X) bewteen conditions
 ## Created to be executable from RStudio
 library(VennDiagram)
-
+# Load your data
 # Read the tab-separated file
-  data <- read.table("C:/Users/cesar/OneDrive/Escritorio/UNAM/Proyecto/Archivos_finales/2024-2/MetaTranscriptoma/Results_Annotados_WTrans.tsv", sep="\t", header=TRUE)
+data <- read.table("C:/Users/cesar/OneDrive/Escritorio/UNAM/Proyecto/Archivos_finales/2024-2/MetaTranscriptoma/Results_Annotados_WTrans.tsv", sep="\t", header=TRUE)
 
 # Ensure all gene IDs are converted to lowercase for case-insensitive comparison
 data <- lapply(data, tolower)
