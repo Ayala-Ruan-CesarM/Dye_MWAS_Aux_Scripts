@@ -43,9 +43,21 @@ python Taxonomic_Scatter_ploy.py -i aldex_result_genus.tsv
 ## How to use VeenDiagram.R
 ```
 # It is design to be used with Rstudio on Windows or similar.
-#  
-
+# As input requires a tab separeted file with headers according to the condition
+# It was desing to analyze the Gene_hits.txt annotation IDs in each condition not the sequence
+# The library(VennDiagram) only can draw up to 5 conditions
+# Load the data to the "data" dataframe
+# data <- read.table("C:/PATH_To_File.tsv", sep="\t", header=TRUE)
+# Create a list with each conditon
+# gene_set1 <- na.omit(data$THE_NAME_OF_YOUR_CONDITION)
 ```
 ## How to use Generar_KernelMatrix_fromBray.R
 ```
+# It is design to be used with Rstudio on Windows or similar.
+# As input requires the a distance metric e.g. Bray-Courtis output of ALDEX2
+# Only need to modify the PATH to the input and output variables
+# input:
+# bray_curtis <- read.delim("c:/PATH_TO_/Bray_courtis_table.txt", sep="\t")
+# output:
+# write.table(kernel_matrix, "c:/PATH_TO_/kernel_matrix.tsv", row.names = TRUE, sep="\t")
 ```
