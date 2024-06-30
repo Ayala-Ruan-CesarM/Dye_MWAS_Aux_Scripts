@@ -16,13 +16,14 @@ def parse_args():
     parser.add_argument("-k", "--kegg_DB", help= "Nombre de la base de datos de KEGG",required=True )
     parser.add_argument("-u", "--uniref_DB", default= "part*.split", help="Patron comun de los archivos que contengan los identificadores de Uniref90. Default 'part*.split' ",required=None)
     parser.add_argument("-o", "--output_file", type=str, default="GeneHis_Anotated.txt", help = "Name of Output file to store the filtered data. Default:Data_Filtered.txt", required=None) 
+    parser.add_argument("-p", "--pattern", type=str, default="TEXDB", help = "Pattern or locus tag of hypothetical protein IDs", required=True)
     args = parser.parse_args()
     return args
 
 start_time = time.time()
 
 
-def getting_unirefids(input_file,blastp_output):
+def getting_unirefids(input_file,blastp_output,pattern):
     print(f"Program starting with {input_file}")
 
 
@@ -31,7 +32,7 @@ def getting_unirefids(input_file,blastp_output):
     query = pd.read_csv(input_file, sep='\t', header=None)
 
     # Filter rows with gene ID strings starting with "TEXDB"
-    query = query[query[0].str.startswith('TEXDB')]
+    query = query[query[0].str.startswith({pattern})]
     #print (query[0])
     # Read Reference file
     reference_file = pd.read_csv(blastp_output, sep='\t', header=None, dtype=str)
@@ -130,7 +131,7 @@ def annotations_to_genefile():
                         #Aqui este Aun es un archivo intermediario. Solo contiene los TEXDB anotados
     print("Gene names assigned to UnirefIDs")
 
-def matchgenes_KOs(input_file,kegg_DB):
+def matchgenes_KOs(input_file,kegg_DB,pattern):
     print("Assiging KOs to genes annotated with Prokka DB")
     with open(input_file,'r') as query_file:
         query_lines = query_file.readlines()
@@ -147,7 +148,7 @@ def matchgenes_KOs(input_file,kegg_DB):
         # Get the gene ID from the first column
         gene_id = query_items[0]
         # If the gene ID starts with "TEXDB", do nothing
-        if gene_id.startswith("TEXDB"):
+        if gene_id.startswith(pattern):
             continue
         # Otherwise, remove the "_" and the numbers from the gene ID
         else:
@@ -189,8 +190,8 @@ def merge_file(output_file):
 
 if __name__ == "__main__":
     args=parse_args()
-    getting_unirefids(args.input_file,args.blastp_output)
+    getting_unirefids(args.input_file, args.blastp_output, args.pattern)
     unirefids_annotation(args.uniref_DB)
     annotations_to_genefile()
-    matchgenes_KOs(args.input_file, args.kegg_DB)
+    matchgenes_KOs(args.input_file, args.kegg_DB, args.pattern)
     merge_file(args.output_file)
